@@ -7,7 +7,7 @@ public class Consts {
     // Configuration of a database
 
     public final static String DB_NAME = "top_books_search_app";
-    public final static int DB_VERSION = 6;
+    public final static int DB_VERSION = 2;
     public final static String DB_COL_ID_PRIMARY = "_id";
 
     public final static String DB_TABLE_BOOK_LISTS = "book_lists";
@@ -28,11 +28,7 @@ public class Consts {
     public final static String DB_B_COL_ID13 = "isbn_13";
     public final static String DB_B_COL_RANK = "rank";
     public final static String DB_B_COL_AGE_GROUP = "age_group";
-
-    /*
-
-    "DROP TABLE IF EXISTS " + DB_TABLE_BOOK_LISTS +
-     */
+    public final static String DB_B_COL_AMAZON_LINK = "amazon_link";
 
 
     public static final String DB_CREATE_TABLE_B =
@@ -48,6 +44,7 @@ public class Consts {
                     DB_B_COL_ID13 + " text," +
                     DB_B_COL_RANK + " integer," +
                     DB_B_COL_AGE_GROUP + " text," +
+                    DB_B_COL_AMAZON_LINK + " text," +
                     " UNIQUE ( " + DB_B_COL_ID13 + " ) ON CONFLICT IGNORE" +
                     ");";
 
@@ -64,7 +61,7 @@ public class Consts {
                     ");";
 
     public static final String DB_DELETE_ENTRIES_B =
-                    " DROP TABLE IF EXISTS " + DB_TABLE_BOOKS;
+            " DROP TABLE IF EXISTS " + DB_TABLE_BOOKS;
     public static final String DB_DELETE_ENTRIES_BL =
-                    " DROP TABLE IF EXISTS " + DB_TABLE_BOOK_LISTS;
+            " DROP TABLE IF EXISTS " + DB_TABLE_BOOK_LISTS;
 }

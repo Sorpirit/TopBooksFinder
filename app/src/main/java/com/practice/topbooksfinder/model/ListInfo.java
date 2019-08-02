@@ -26,7 +26,7 @@ public class ListInfo {
     @SerializedName("books")
     private List<BookInfo> books;
 
-    public ListInfo(String listName,String encodeName, String newestPublishedDate, String oldestPublishedDate, String update, List<BookInfo> booksD, List<BookInfo> books) {
+    public ListInfo(String listName, String encodeName, String newestPublishedDate, String oldestPublishedDate, String update, List<BookInfo> booksD, List<BookInfo> books) {
         this.listName = listName;
         this.encodeName = encodeName;
         this.newestPublishedDate = newestPublishedDate;
@@ -43,14 +43,17 @@ public class ListInfo {
     public String getListName() {
         return listName;
     }
+
     @Nullable
     public String getNewestPublishedDate() {
         return newestPublishedDate;
     }
+
     @Nullable
     public String getOldestPublishedDate() {
         return oldestPublishedDate;
     }
+
     @Nullable
     public String getUpdate() {
         return update;
@@ -58,16 +61,5 @@ public class ListInfo {
 
     public String getEncodeName() {
         return encodeName;
-    }
-
-    @Override
-    public String toString() {
-        return "ListInfo{" +
-                "listName='" + listName + '\'' +
-                ", newestPublishedDate='" + newestPublishedDate + '\'' +
-                ", oldestPublishedDate='" + oldestPublishedDate + '\'' +
-                ", update='" + update + '\'' +
-                ", books=" + books +
-                '}';
     }
 }

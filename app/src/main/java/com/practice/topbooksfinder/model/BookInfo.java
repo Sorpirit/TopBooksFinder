@@ -30,12 +30,10 @@ public class BookInfo {
 
     @SerializedName("primary_isbn13")
     private String id13;
+    @SerializedName("amazon_product_url")
+    private String amazonLink;
 
-
-    public BookInfo(String title, String author, String contributor, String publisher,
-                    String ageGroup, String description, int rank, String bookImageUrl,
-                    String id13) {
-
+    public BookInfo(String title, String author, String contributor, String publisher, String ageGroup, String description, int rank, String bookImageUrl, String id13, String amazonLink) {
         this.title = title;
         this.author = author;
         this.contributor = contributor;
@@ -45,8 +43,8 @@ public class BookInfo {
         this.rank = rank;
         this.bookImageUrl = bookImageUrl;
         this.id13 = id13;
+        this.amazonLink = amazonLink;
     }
-
 
     public String getTitle() {
         return title;
@@ -55,14 +53,17 @@ public class BookInfo {
     public String getAuthor() {
         return author;
     }
+
     @Nullable
     public String getContributor() {
         return contributor;
     }
+
     @Nullable
     public String getPublisher() {
         return publisher;
     }
+
     @Nullable
     public String getAgeGroup() {
         return ageGroup;
@@ -75,28 +76,19 @@ public class BookInfo {
     public int getRank() {
         return rank;
     }
+
     @Nullable
     public String getBookImageUrl() {
         return bookImageUrl;
     }
+
     @Nullable
     public String getId13() {
         return id13;
     }
 
-
-    @Override
-    public String toString() {
-        return "BookInfo{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", contributor='" + contributor + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", ageGroup='" + ageGroup + '\'' +
-                ", description='" + description + '\'' +
-                ", rank=" + rank +
-                ", bookImageUrl='" + bookImageUrl + '\'' +
-                ", id13='" + id13 + '\'' +
-                '}';
+    @Nullable
+    public String getAmazonLink() {
+        return amazonLink;
     }
 }

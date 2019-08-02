@@ -14,10 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.practice.topbooksfinder.R;
 import com.practice.topbooksfinder.model.BookInfo;
-import com.practice.topbooksfinder.model.ListInfo;
 import com.practice.topbooksfinder.utils.Consts;
-
-import java.util.List;
 
 import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
@@ -25,9 +22,10 @@ public class BooksListRecyclerViewAdapter extends CursorRecyclerViewAdapter<Book
 
     private Context ctx;
 
+    private View.OnClickListener listener;
 
-    public BooksListRecyclerViewAdapter(Context ctx,Cursor cursor) {
-        super(ctx,cursor);
+    public BooksListRecyclerViewAdapter(Context ctx, Cursor cursor) {
+        super(ctx, cursor);
         this.ctx = ctx;
     }
 
@@ -36,10 +34,10 @@ public class BooksListRecyclerViewAdapter extends CursorRecyclerViewAdapter<Book
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_book, parent, false);
 
+        if (listener != null) view.setOnClickListener(listener);
 
         return new ViewHolder(view);
     }
-
 
 
     @SuppressLint("NewApi")
@@ -56,34 +54,37 @@ public class BooksListRecyclerViewAdapter extends CursorRecyclerViewAdapter<Book
         if (info.getBookImageUrl() != null && !info.getBookImageUrl().isEmpty()) {
             Glide.with(holder.imBookImage)
                     .load(info.getBookImageUrl())
-                    .override(300,600)
+                    .override(300, 600)
+                    .placeholder(R.drawable.book_img_holder)
                     .into(holder.imBookImage);
-
-
         }
 
-        if(cursor.getPosition() == getItemCount()-1) holder.divider.setVisibility(View.INVISIBLE);
+        if (cursor.getPosition() == getItemCount() - 1)
+            holder.divider.setVisibility(View.INVISIBLE);
     }
 
-    public BookInfo getBookInfo(Cursor c){
-        return new BookInfo(c.getString(c.getColumnIndex(Consts.DB_B_COL_TITLE)),c.getString(c.getColumnIndex(Consts.DB_B_COL_AUTHOR)),
-                c.getString(c.getColumnIndex(Consts.DB_B_COL_CONTRIBUTOR)),c.getString(c.getColumnIndex(Consts.DB_B_COL_PUBLISHER)),
-                c.getString(c.getColumnIndex(Consts.DB_B_COL_AGE_GROUP)),c.getString(c.getColumnIndex(Consts.DB_B_COL_DESCRIPTION)),
-                c.getInt(c.getColumnIndex(Consts.DB_B_COL_RANK)),c.getString(c.getColumnIndex(Consts.DB_B_COL_BOOK_IMAGE_URL)),
-                c.getString(c.getColumnIndex(Consts.DB_B_COL_ID13)));
+    public BookInfo getBookInfo(Cursor c) {
+        return new BookInfo(c.getString(c.getColumnIndex(Consts.DB_B_COL_TITLE)), c.getString(c.getColumnIndex(Consts.DB_B_COL_AUTHOR)),
+                c.getString(c.getColumnIndex(Consts.DB_B_COL_CONTRIBUTOR)), c.getString(c.getColumnIndex(Consts.DB_B_COL_PUBLISHER)),
+                c.getString(c.getColumnIndex(Consts.DB_B_COL_AGE_GROUP)), c.getString(c.getColumnIndex(Consts.DB_B_COL_DESCRIPTION)),
+                c.getInt(c.getColumnIndex(Consts.DB_B_COL_RANK)), c.getString(c.getColumnIndex(Consts.DB_B_COL_BOOK_IMAGE_URL)),
+                c.getString(c.getColumnIndex(Consts.DB_B_COL_ID13)), c.getString(c.getColumnIndex(Consts.DB_B_COL_AMAZON_LINK)));
     }
-    public BookInfo getBookInfo(int position){
+
+    public BookInfo getBookInfo(int position) {
         Cursor c = getCursor();
-        if(c.moveToPosition(position)){
+        if (c.moveToPosition(position)) {
 
             return getBookInfo(c);
 
-        }else {
+        } else {
             return null;
         }
     }
 
-
+    public void setListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

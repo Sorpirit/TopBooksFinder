@@ -3,19 +3,14 @@ package com.practice.topbooksfinder.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.practice.topbooksfinder.R;
 import com.practice.topbooksfinder.model.ListInfo;
 import com.practice.topbooksfinder.utils.Consts;
-
-import java.util.List;
 
 public class BookListsRecyclerViewAdapter extends CursorRecyclerViewAdapter<BookListsRecyclerViewAdapter.ViewHolder> {
 
@@ -24,7 +19,6 @@ public class BookListsRecyclerViewAdapter extends CursorRecyclerViewAdapter<Book
     public BookListsRecyclerViewAdapter(Context context, Cursor cursor) {
         super(context, cursor);
     }
-
 
 
     @Override
@@ -37,21 +31,22 @@ public class BookListsRecyclerViewAdapter extends CursorRecyclerViewAdapter<Book
         return new ViewHolder(view);
     }
 
-    public ListInfo getListInfo(Cursor c){
+    public ListInfo getListInfo(Cursor c) {
         return new ListInfo(c.getString(c.getColumnIndex(Consts.DB_BL_COL_LIST_NAME)),
                 c.getString(c.getColumnIndex(Consts.DB_BL_COL_ENCODE_NAME)),
                 c.getString(c.getColumnIndex(Consts.DB_BL_COL_NEWEST_Published_Date)),
                 c.getString(c.getColumnIndex(Consts.DB_BL_COL_OLDEST_Published_Date)),
                 c.getString(c.getColumnIndex(Consts.DB_BL_COL_UPDATE)),
-                null,null);
+                null, null);
     }
-    public ListInfo getListInfo(int position){
+
+    public ListInfo getListInfo(int position) {
         Cursor c = getCursor();
-        if(c.moveToPosition(position)){
+        if (c.moveToPosition(position)) {
 
             return getListInfo(c);
 
-        }else {
+        } else {
             return null;
         }
     }

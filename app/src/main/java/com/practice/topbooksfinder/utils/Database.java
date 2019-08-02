@@ -9,30 +9,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.practice.topbooksfinder.model.BookInfo;
 import com.practice.topbooksfinder.model.ListInfo;
 
-import org.jetbrains.annotations.Contract;
-
 import java.util.List;
 
 public class Database {
 
-    private static Database database;
     private Context ctx;
 
     private DBHelper dbHelper;
 
     private SQLiteDatabase mDB;
 
-    private Database(Context ctx) {
+    public Database(Context ctx) {
         this.ctx = ctx;
     }
 
-    public static Database getInstanse(){
-        return database;
-    }
-    public static Database creatDatabase(Context ctx){
-        if(database == null) database = new Database(ctx);
-        return database;
-    }
 
     public void open() {
         dbHelper = new DBHelper(ctx, Consts.DB_NAME, null, Consts.DB_VERSION);
@@ -69,6 +59,7 @@ public class Database {
         cv.put(Consts.DB_B_COL_BOOK_IMAGE_URL, item.getBookImageUrl());
         cv.put(Consts.DB_B_COL_ID13, item.getId13());
         cv.put(Consts.DB_B_COL_PUBLISHER, item.getPublisher());
+        cv.put(Consts.DB_B_COL_AMAZON_LINK, item.getAmazonLink());
 
         mDB.insert(Consts.DB_TABLE_BOOKS, null, cv);
     }
@@ -91,6 +82,7 @@ public class Database {
             }
         }
     }
+
     public void addBookLists(List<ListInfo> items) {
         if (items.size() != 0) {
             for (int i = items.size() - 1; i >= 0; i--) {

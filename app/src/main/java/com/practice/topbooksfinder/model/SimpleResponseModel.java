@@ -7,9 +7,9 @@ import java.util.List;
 public class SimpleResponseModel<T> {
 
     @SerializedName("status")
-    private String status;
+    private String status = "";
     @SerializedName("num_results")
-    private int numResults;
+    private int numResults = 0;
 
     @SerializedName("results")
     private List<T> results;
